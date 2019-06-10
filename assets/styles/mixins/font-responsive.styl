@@ -1,0 +1,9 @@
+font-responsive(cp1-fsize, cp1-wsize, cp2-fsize, cp2-wsize, cp3-fsize, cp3-wsize)
+    +below(cp1-wsize)
+        font-size cp1-fsize
+
+    +between(cp1-wsize, cp2-wsize)
+        font-size s("calc(%s + (100vw - %s) * %s)", cp1-fsize, cp1-wsize, round(unit((cp2-fsize - cp1-fsize) / (cp2-wsize - cp1-wsize), ""), 6))
+
+    +above(cp2-wsize)
+        font-size s("calc(%s + (100vw - %s) * %s)", cp2-fsize, cp2-wsize, round(unit((cp3-fsize - cp2-fsize) / (cp3-wsize - cp2-wsize), ""), 6))

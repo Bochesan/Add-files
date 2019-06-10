@@ -1,0 +1,192 @@
+$font-default
+    font-family ff-default
+    font-weight fw-default
+
+$line-height--default
+    line-height lh-default
+
+$line-height--headings
+    line-height lh-headings
+
+$line-height--paragraph
+    line-height lh-paragraph
+
+$font-headings
+    font-weight bold
+    @extend $font-default, $line-height--headings
+
+
+html
+    font-responsive(fz-min, cp-min-font, fz-mid, cp-mid-font, fz-default, cp-default-font)
+
+body
+    @extend $font-default, $line-height--default
+    color black
+    text-rendering optimizeLegibility
+    font-feature-settings "kern" 1, "liga" 1, "calt" 1, "pnum" 1, "tnum" 0, "onum" 0, "lnum" 0, "dlig" 0
+
+
+$h1, $h2, $h3, $h4, $h5, $h6
+    @extend $font-headings
+
+// "Заготовки" для основных
+// типов заголовков
+
+headings-default-margin = 1.5em 0 0.8em
+
+$h1
+    fz(40)
+    margin headings-default-margin
+
+h1, .like-h1
+    @extend $h1
+
+$h2
+    fz(30)
+    margin headings-default-margin
+
+h2, .like-h2
+    @extend $h2
+
+$h3
+    fz(24)
+    margin headings-default-margin
+
+h3, .like-h3
+    @extend $h3
+
+$h4
+    fz(20)
+    margin headings-default-margin
+
+h4, .like-h4
+    @extend $h4
+
+$h5
+    fz(16)
+    margin headings-default-margin
+
+h5, .like-h5
+    @extend $h5
+
+$h6
+    fz(14)
+    margin headings-default-margin
+
+h6, .like-h6
+    @extend $h6
+
+
+
+$link-decoration-currentColor
+    link-decoration(bd-clr: currentColor, forceApply: true)
+
+$link-decoration-none
+    link-decoration(bd-clr: none, forceApply: true)
+
+a
+    color inherit
+    text-decoration none
+
+    &:not([class])
+        link-decoration(currentColor)
+
+    &[role="button"]
+        cursor pointer
+        user-select none
+
+    &[href^="tel:"]
+        link-decoration(none)
+
+p
+    margin 1em 0
+
+
+$list-common
+    list-style-type none
+    //margin 1em 0 2em
+    padding 0
+
+    li
+        margin 0.3em 0
+
+ul
+    @extend $list-common
+
+    li
+        position relative
+        padding-left 1.2em
+
+        &:before
+            content ""
+            bullet()
+            position absolute
+            left 0
+            top 0.2em
+
+    ol li
+        &:before
+            display inline
+            background none
+            transform none
+
+ol
+    @extend $list-common
+    counter-reset ol-level-1
+
+    li
+        position relative
+        padding-left 0.7em
+
+        &:before
+            position absolute
+            top 0
+            right 100%
+            left auto
+
+    > li
+        counter-increment ol-level-1
+        margin-left 1em
+
+        &:before
+            content counter(ol-level-1) "."
+
+        > ol
+            counter-reset ol-level-2
+
+            > li
+                counter-increment ol-level-2
+                margin-left 1.8em
+
+                &:before
+                    content counter(ol-level-1) "." counter(ol-level-2) "."
+
+                > ol
+                    counter-reset ol-level-3
+
+                    > li
+                        counter-increment ol-level-3
+                        margin-left 2.7em
+
+                        &:before
+                            content counter(ol-level-1) "." counter(ol-level-2) "." counter(ol-level-3) "."
+
+
+blockquote
+    margin 1em 0
+    padding 0.5em 0 0.5em 2em
+    border-left rel-size(2px) solid currentColor
+
+dl
+    margin 1em 0
+
+dt
+    margin-bottom 0.5em
+
+dd
+    margin-bottom 1.2em
+    font-style italic
+
+pre
+    overflow auto
+    white-space pre-wrap

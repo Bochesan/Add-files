@@ -1,0 +1,7 @@
+rel-size(s, units = rem)
+    if s
+        if s == 1 || s == 1px
+            1px
+
+        else
+            unit((s / fz-default), units)
